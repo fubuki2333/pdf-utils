@@ -1,4 +1,5 @@
 # 基础版依赖
+numpy==1.26.4
 pdf2docx
 PyMuPDF
 python-docx

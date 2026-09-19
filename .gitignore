@@ -9,8 +9,13 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+build_*/
 develop-eggs/
 dist/
+dist_*/
+
+# 打包时从 ~/.paddleocr 拷进来的模型副本，体积大且可重建
+paddleocr_models/
 downloads/
 eggs/
 .eggs/
@@ -31,6 +36,8 @@ MANIFEST
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
+# 本项目的 spec 是手写并维护的（含模型打包逻辑），必须纳入版本控制
+!pdf_to_word_paddleocr.spec
 
 # Installer logs
 pip-log.txt

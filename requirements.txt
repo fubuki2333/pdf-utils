@@ -1,15 +1,10 @@
-# 基础版依赖
+# 基础依赖
 numpy==1.26.4
 pdf2docx
 PyMuPDF
 python-docx
 
-# OCR增强版依赖
-pdf2image
-pillow
-pytesseract
-
-# PaddleOCR版依赖
+# OCR依赖
 paddlepaddle==2.6.2
 paddleocr>=2.6.0,<2.8.0
 opencv-python

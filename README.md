@@ -3,25 +3,27 @@ PDF转换工具集
 
 ## 项目简介
 
-这是一个PDF转换小工具集合，目前正常持续更新ing~
-目前已提供的工具：
+这是一个PDF转换小工具，目前正常持续更新ing~
 
-- **PDF转Word 基础版**：适用于常规PDF文件的转换
-- **PDF转Word OCR增强版**：适用于扫描版PDF文件的转换，使用Tesseract OCR引擎
-- **PDF转Word PaddleOCR版**：使用百度PaddleOCR引擎，提供更准确的文字识别
+- **PDF转Word PaddleOCR版**：常规PDF直接转换；扫描版PDF用百度PaddleOCR引擎识别
 
 ## 功能特点
 
-### PaddleOCR版本特点
 - ✅ 支持常规PDF文件转换
 - ✅ 支持扫描版PDF文件的OCR识别
-- ✅ 支持多语言识别（中文、英文、中英文混合）
+- ✅ 支持中文、英文识别
 - ✅ 图形用户界面，操作简单直观
 - ✅ 实时转换进度显示
 - ✅ 自动打开输出文件所在目录
-- ✅ 内置依赖检查和自动安装功能
+- ✅ OCR模型内置，下载后无需联网下载模型即可使用
 
 ## 安装方法
+
+### 方式一：直接使用打包好的程序
+
+下载 `PDF转Word工具(PaddleOCR版).exe` 双击运行，无需安装 Python 或任何依赖。
+
+### 方式二：从源码运行
 
 1. 确保已安装Python 3.12+
 2. 克隆或下载项目代码
@@ -31,16 +33,9 @@ PDF转换工具集
 pip install -r requirements.txt
 ```
 
-4. 运行对应版本：
+4. 运行：
 
 ```bash
-# 基础版
-python pdf_to_word.py
-
-# OCR增强版
-python pdf_to_word_ocr.py
-
-# PaddleOCR版
 python pdf_to_word_paddleocr.py
 ```
 
@@ -56,22 +51,22 @@ python pdf_to_word_paddleocr.py
 
 ## 依赖项
 
-### 基础版依赖
 - pdf2docx
 - PyMuPDF (fitz)
 - python-docx
-
-### OCR增强版依赖
-- 基础版所有依赖
-- 额外的OCR库（Tesseract）
-- 需自行安装Tesseract OCR引擎，[下载地址](https://github.com/UB-Mannheim/tesseract/wiki)
-
-### PaddleOCR版依赖
-- 基础版所有依赖
-- PaddleOCR
-- PaddlePaddle
+- PaddleOCR / PaddlePaddle
 - Pillow (PIL)
 - OpenCV (cv2)
+
+## 打包
+
+打包前先在开发机上跑一次 OCR，让 PaddleOCR 把模型缓存到 `~/.paddleocr`，
+构建脚本会把模型一并打进包里，用户下载后无需联网即可识别。
+
+```bash
+python pdf_to_word_paddleocr.py --self-test   # 确认 OCR 可用
+pyinstaller pdf_to_word_paddleocr.spec
+```
 
 ## 常见问题
 
@@ -86,16 +81,8 @@ python pdf_to_word_paddleocr.py
 - 尝试调整PDF文件的DPI设置
 
 ### 3. 程序启动缓慢怎么办？
-- PaddleOCR版本首次启动需要加载模型，会比较慢
+- 首次启动需要加载模型，会比较慢
 - 后续启动会快很多
-
-## 技术说明
-
-### PaddleOCR版本技术特点
-- 使用延迟导入技术加快启动速度
-- 优化OCR配置以提高兼容性
-- 支持多线程处理，提高转换效率
-- 内置错误处理机制，提高程序稳定性
 
 ## 版本历史
 

@@ -16,7 +16,7 @@ PDF 转换工具集 —— 一个窗口，左侧选功能，右侧操作。
 
 ### 方式一：直接使用打包好的程序
 
-下载 `PDF工具箱.exe` 双击运行，无需安装 Python 或任何依赖。
+下载 [Releases](https://github.com/fubuki2333/pdf-utils/releases) 里的 `PDF工具箱.exe` 双击运行，无需安装 Python 或任何依赖。
 
 ### 方式二：从源码运行
 
@@ -140,8 +140,7 @@ dist/PDF工具箱.exe --self-test
 
 ## 版本历史
 
-- **v1.0**：PDF 转 Word（PaddleOCR 版）
-- **v1.1**：重构为多功能工具箱界面，新增 PDF 转 Markdown
+- **0.0.1**：首个发布版本。PDF 转 Word（含扫描版 OCR）、PDF 转 Markdown
 
 ## 许可证
 

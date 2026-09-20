@@ -9,4 +9,4 @@
     selfcheck.py    自检
 """
 
-__version__ = "1.1.0"
+__version__ = "0.0.1"

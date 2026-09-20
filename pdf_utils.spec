@@ -12,7 +12,7 @@ PADDLEOCR_HOME = os.environ.get("PADDLEOCR_HOME") or os.path.join(os.path.expand
 if not os.path.isdir(PADDLEOCR_HOME):
     raise SystemExit(
         f"找不到 OCR 模型目录 {PADDLEOCR_HOME}。\n"
-        f"请先运行一次 `python pdf_to_word_paddleocr.py` 并完成一次 OCR 识别，"
+        f"请先运行一次 `python -m pdf_utils` 并完成一次 OCR 识别，"
         f"让 PaddleOCR 下载模型，或用 PADDLEOCR_HOME 环境变量指定模型目录。"
     )
 
@@ -55,12 +55,26 @@ for dist in [
 ]:
     runtime_metadata += copy_metadata(dist)
 
-a = Analysis(['pdf_to_word_paddleocr.py'],
-             pathex=['D:\\Codes\\Utils\\pdf-utils'],
+# 打包 src 布局的包：pathex 指到 src，入口用包内的 __main__.py。
+# 入口脚本是绝对导入（见 __main__.py 注释），所以 hiddenimports 里要显式列出
+# 包内其余模块 —— PyInstaller 只会顺着入口的 import 走，漏了就运行时才炸。
+PROJECT_ROOT = os.path.dirname(os.path.abspath(SPEC))
+SRC_DIR = os.path.join(PROJECT_ROOT, "src")
+
+a = Analysis([os.path.join(SRC_DIR, 'pdf_utils', '__main__.py')],
+             pathex=[SRC_DIR],
              binaries=paddleocr_binaries + paddle_binaries + pyclipper_binaries + runtime_binaries,
              datas=paddleocr_datas + paddle_datas + paddleocr_py_datas + pyclipper_datas + paddleocr_models + runtime_datas + runtime_metadata,
 
               hiddenimports=[
+                  'pdf_utils',
+                  'pdf_utils.gui',
+                  'pdf_utils.tools',
+                  'pdf_utils.ocr',
+                  'pdf_utils.selfcheck',
+                  'pdf_utils.converters',
+                  'pdf_utils.converters.to_word',
+                  'pdf_utils.converters.to_markdown',
                   'pdf2docx',
                   'fitz',
                   'PIL',
@@ -102,7 +116,7 @@ ex = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='PDF转Word工具(PaddleOCR版)',
+          name='PDF工具箱',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,

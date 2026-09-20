@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdf-utils"
+version = "1.1.0"
+description = "多功能 PDF 转换工具：PDF 转 Word / Markdown，支持扫描版 OCR"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { file = "LICENSE" }
+dependencies = [
+    "numpy==1.26.4",
+    "pdf2docx",
+    "PyMuPDF",
+    "python-docx",
+    "paddlepaddle==2.6.2",
+    "paddleocr>=2.6.0,<2.8.0",
+    "opencv-python",
+]
+
+[project.optional-dependencies]
+dev = ["pyinstaller"]
+
+[project.scripts]
+pdf-utils = "pdf_utils.__main__:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]

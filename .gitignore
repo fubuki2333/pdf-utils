@@ -212,3 +212,6 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# 测试用 PDF，由 make_test_pdfs.py 生成，可随时重建
+test_pdfs/
